@@ -23,7 +23,7 @@
 #   docker run -ti --rm -e HOST_IP=$(ip route | grep -v docker | awk '{if(NF==11) print $9}') --entrypoint /bin/bash local/pfioh
 #
 
-FROM fnndsc/ubuntu-python3:latest
+FROM ubuntu:latest
 MAINTAINER fnndsc "dev@babymri.org"
 
 # Pass a UID on build command line (see above) to set internal UID
@@ -35,6 +35,9 @@ COPY ./docker-entrypoint.py /dock/docker-entrypoint.py
 
 RUN apt-get update \
   && apt-get install sudo                                             \
+  && apt-get install -y python3.7                                     \ 
+  && apt-get install -y python-pip                                    \
+  && apt-get install --upgrade -y python3-pip                         \
   && useradd -u $UID -ms /bin/bash localuser                          \
   && addgroup localuser sudo                                          \
   && echo "localuser:localuser" | chpasswd                            \
