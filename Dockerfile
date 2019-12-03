@@ -23,7 +23,7 @@
 #   docker run -ti --rm -e HOST_IP=$(ip route | grep -v docker | awk '{if(NF==11) print $9}') --entrypoint /bin/bash local/pfioh
 #
 
-FROM ubuntu:latest
+FROM ppc64le/ubuntu:latest
 MAINTAINER fnndsc "dev@babymri.org"
 
 # Pass a UID on build command line (see above) to set internal UID
